@@ -1,10 +1,11 @@
+
 ## install
 
 1. Clone the repository:
    ```sh
    git clone https://github.com/LeonidRed17/ApplicationTopCategoryPositions.git
 
-2. Установите зависимости:
+2. Install Dependencies:
    ```sh
    composer install
 

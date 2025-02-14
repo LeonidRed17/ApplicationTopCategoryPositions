@@ -59,15 +59,7 @@ class GetAppticaTopHistoryData extends Command
             } else {
                 $this->error('Нет данных для добавления.');
             }
-            //dd($dataArray);
 
-
-            /*
-            foreach ($responseData as $testcategories) {
-                echo $testcategories;
-            }
-*/
-            //$this->line($parsedResponseData);
         }
     }
 }
