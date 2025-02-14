@@ -8,13 +8,12 @@ use App\Models\AppticaTopPosition;
 
 class GetAppticaTopHistoryData extends Command
 {
-    // Название и описание команды
+
     protected $signature = 'apptica:get-top-history {date_from=2025-01-24} {date_to=2025-02-14}';
     protected $description = 'Получение данных из Apptica для указанного периода';
 
     public function handle()
     {
-        // Получаем параметры из аргументов команды
         $dateFrom = $this->argument('date_from');
         $dateTo = $this->argument('date_to');
 
@@ -32,7 +31,6 @@ class GetAppticaTopHistoryData extends Command
             'B4NKGg' => $token,
         ]);
 
-        // Обрабатываем ответ
         if ($response->successful()) {
             $responseData = $response->json();
 
@@ -45,15 +43,13 @@ class GetAppticaTopHistoryData extends Command
                 foreach ($responseData['data'] as $categoryId => $subcategoryData) {
                     foreach ($subcategoryData as $subcategoryId => $dates) {
                         foreach ($dates as $date => $position) {
-                            // Если позиция не null, сохраняем в базу
                             if ($position !== null  && !empty($date)) {
-                                // Создаем запись в базе данных
                                 AppticaTopPosition::create([
-                                    'date_from' => $date, //data
-                                    'date_to' => $date,  // Дата
-                                    'position' => $position,  // Позиция
-                                    'category' => $categoryId,  // Категория
-                                    'subcategory' => $subcategoryId,  // Подкатегория
+                                    'date_from' => $date,
+                                    'date_to' => $date,  
+                                    'position' => $position, 
+                                    'category' => $categoryId,
+                                    'subcategory' => $subcategoryId,
                                 ]);
                                 $this->info("Запись для категории {$categoryId}, подкатегории {$subcategoryId} на дату {$date} добавлена с позицией {$position}.");
                             }

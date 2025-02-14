@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AppticaTopPosition;
+use App\Services\AppTopCategoryService;
 
 class MainController extends Controller
 {
+    protected $appTopCategoryService;
+
+    public function __construct(AppTopCategoryService $appTopCategoryService)
+    {
+        $this->appTopCategoryService = $appTopCategoryService;
+    }
+
     public function getAppTopCategory($date)
     {
-        $positions = AppticaTopPosition::where('date_from', '=', $date)
-            ->select('category', 'position')
-            ->get()
-            ->sortBy('position')
-            ->groupBy('category') 
-            ->map(function ($group) {
-                return implode(',', $group->pluck('position')->toArray());  // Преобразуем позиции в строку через запятую
-            });
+        $positions = $this->appTopCategoryService->getTopCategoryByDate($date);
 
         return response()->json($positions);
-
     }
 }
