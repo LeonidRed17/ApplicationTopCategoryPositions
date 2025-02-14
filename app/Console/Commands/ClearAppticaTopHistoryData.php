@@ -35,5 +35,4 @@ class ClearAppticaTopHistoryData extends Command
             $this->info('Нет данных для удаления.');
         }
     }
-
 }

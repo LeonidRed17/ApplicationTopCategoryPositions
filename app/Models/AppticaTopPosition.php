@@ -9,7 +9,6 @@ class AppticaTopPosition extends Model
 {
     use HasFactory;
 
-    // Указываем, какие атрибуты могут быть массово заполняемыми
     protected $fillable = [
         'position',
         'category',
